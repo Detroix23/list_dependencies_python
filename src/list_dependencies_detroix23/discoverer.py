@@ -13,6 +13,7 @@ class Discoverer:
 	path: pathlib.Path
 	found: list[pathlib.Path]
 	files_include_extensions: list[str]
+	""" Allowed file extensions. Do **not** include the dot."""
 	folder_exclude_prefixes: list[str]
 
 	def __init__(
@@ -23,6 +24,9 @@ class Discoverer:
 	) -> None:
 		"""
 		Instantiate the `Discoverer`. To list the files, use `discover()`.
+
+		Arguments:
+		- `files_include_extensions`: do **not** include the dot in the extension.
 		"""
 		self.path = path
 		self.found = []
@@ -69,9 +73,3 @@ class Discoverer:
 		discovered: list[pathlib.Path] = discover_recurse(path)
 		self.found += discovered
 		return discovered
-
-def format_discovery(paths: list[pathlib.Path]) -> str:
-	"""
-	Return a formatted `[`list`]`: one path per line, starting with a `tab`.
-	"""
-	return f"[\n\t{'\n\t'.join([str(path) for path in paths])}\n]"

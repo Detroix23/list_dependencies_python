@@ -10,7 +10,8 @@ def analyze_line(line: str) -> set[str]:
 	"""
 	Return all modules found in `line`.
 	"""
-	tokens: list[str] = re.split(r"\W+", line.strip())
+	FORBIDDEN: set[str] = {".", " ", ",", ";", "(", ")"}
+	tokens: list[str] = re.split(r"[,\s]", line.strip())
 	modules: set[str] = set()
 
 	if tokens[0] == "import":
@@ -19,14 +20,17 @@ def analyze_line(line: str) -> set[str]:
 		while pure_imports and i < len(tokens):
 			if tokens[i] == "as":
 				pure_imports = False
-			elif not tokens[i]:
-				pass
-			else:
+			elif tokens[i] and set(tokens[i]).isdisjoint(FORBIDDEN):
 				modules.add(tokens[i])
 			
 			i += 1
 	
-	elif tokens[0] == "from" and len(tokens) >= 4 and tokens[2] == "import":
+	elif (
+		tokens[0] == "from" 
+		and len(tokens) >= 4 
+		and tokens[2] == "import"
+		and set(tokens[1]).isdisjoint(FORBIDDEN)
+	):
 		modules.add(tokens[1])
 	
 	return modules
@@ -47,9 +51,8 @@ def analyze_file(path: pathlib.Path) -> set[str]:
 		
 		return modules
 
-def analyze_project(
+def analyze_project_raw(
 	paths: list[pathlib.Path],
-	exclude: set[str],
 ) -> set[str]:
 	"""
 	Return the conglomerate of modules found in project `path` as a `list[str]`.
@@ -59,5 +62,24 @@ def analyze_project(
 		modules_file: set[str] = analyze_file(path)
 		modules |= modules_file
 	
-	filtered: set[str] = modules - exclude
-	return filtered
+	return modules
+
+def filter_modules(modules: set[str], filterer: set[str]) -> set[str]:
+	"""
+	Use `set` operation subtraction to remove from `modules` any of `filter`.  
+	"""
+	return modules - filterer
+
+def analyze_project(
+	paths: list[pathlib.Path],
+	exclude: set[str]
+) -> set[str]:
+	"""
+	Return the conglomerate of modules found in project `path` as a `list[str]`.
+	"""
+	modules: set[str] = set()
+	for path in paths:
+		modules_file: set[str] = analyze_file(path)
+		modules |= modules_file
+	
+	return filter_modules(modules, exclude)
