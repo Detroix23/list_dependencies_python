@@ -6,7 +6,7 @@
 import pathlib
 from typing import Literal
 
-from list_dependencies_detroix23 import dependencies, discoverer
+from list_dependencies_detroix23 import definitions, dependencies, discoverer
 
 def main() -> None:
 	"""
@@ -48,7 +48,10 @@ def test_flow1() -> None:
 	print(dependencies.analyze_line("import pathlib as test"))
 	print(dependencies.analyze_line("import pathlib, test,test2,test, hello, "))
 
-	print(f"Project `self`: {dependencies.analyze_project(files1, set())}")
+	print(f"Project `self`: {dependencies.analyze_project(
+		files1, 
+		definitions.DEFAULT_PYTHON_MODULES
+	)}")
 
 def assertions_lines1() -> None:
 	print("## Assertions: line 1... ", end="")

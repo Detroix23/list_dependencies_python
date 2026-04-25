@@ -1,6 +1,6 @@
 """
 # List Dependencies.
-/src/list_dependencies_detroix23/dependencies_finder.py
+/src/list_dependencies_detroix23/dependencies.py
 """
 
 import pathlib
@@ -49,7 +49,7 @@ def analyze_file(path: pathlib.Path) -> set[str]:
 
 def analyze_project(
 	paths: list[pathlib.Path],
-	default_modules: set[str],
+	exclude: set[str],
 ) -> set[str]:
 	"""
 	Return the conglomerate of modules found in project `path` as a `list[str]`.
@@ -59,4 +59,5 @@ def analyze_project(
 		modules_file: set[str] = analyze_file(path)
 		modules |= modules_file
 	
-	return modules
+	filtered: set[str] = modules - exclude
+	return filtered

@@ -1,3 +1,4 @@
+# type: ignore
 """
 # List Dependencies.
 /src/list_dependencies_detroix23/__init__.py
@@ -10,3 +11,9 @@ Use the command-line interface with:
 python src/list_dependencies_detroix23/__main__.py <path>
 ```
 """
+
+from . import (
+	definitions,
+	discoverer,
+	dependencies,
+)
