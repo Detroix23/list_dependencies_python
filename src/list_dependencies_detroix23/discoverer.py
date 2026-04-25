@@ -11,6 +11,7 @@ class Discoverer:
 	List all required files for treatment in a given `path`.
 	"""
 	path: pathlib.Path
+	found: list[pathlib.Path]
 	files_include_extensions: list[str]
 	folder_exclude_prefixes: list[str]
 
@@ -24,6 +25,7 @@ class Discoverer:
 		Instantiate the `Discoverer`. To list the files, use `discover()`.
 		"""
 		self.path = path
+		self.found = []
 		self.files_include_extensions = files_include_extensions
 		self.folder_exclude_prefixes = folder_exclude_prefixes
 
@@ -64,7 +66,9 @@ class Discoverer:
 
 			return validated
 
-		return discover_recurse(path)
+		discovered: list[pathlib.Path] = discover_recurse(path)
+		self.found += discovered
+		return discovered
 
 def format_discovery(paths: list[pathlib.Path]) -> str:
 	"""
