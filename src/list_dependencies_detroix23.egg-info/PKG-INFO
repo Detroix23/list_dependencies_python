@@ -4,7 +4,7 @@ Version: 0.1.0
 Summary: List dependencies for a Python project.
 Author-email: Detroix23 <detroix23@gmail.com>
 License-Expression: CC-BY-4.0
-Project-URL: Repository, https://github.com/Detroix23/
+Project-URL: Repository, https://github.com/Detroix23/list_dependencies_python
 Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: OS Independent
 Classifier: Natural Language :: English
@@ -12,3 +12,27 @@ Requires-Python: >=3.14
 Description-Content-Type: text/markdown
 License-File: LICENSE.md
 Dynamic: license-file
+
+# List dependencies.
+Sometimes, files `requirements.txt` or `pyproject.toml` are not complete in their external modules
+definition.
+
+This scripts allow to list all required modules to run a project, filtering built-in libraries.
+
+I made this because I can forgot, a lot, to write these files. Are custom made:
+- the file discoverer;
+- the dependencies parser.
+
+## The command-line tool.
+Execute the script entry-point: 
+```bash
+py src/list_dependencies_detroix23/__main__.py <path>
+```
+
+Arguments:
+- `--help` | `-h`: print helpful message and exists.
+- `--test`: execute the tests bundled in the script.
+- `<path>`: the path to project to analyze.
+
+Can be used shorter scripts:
+- see: [Scripts](https://github.com/Detroix23/Scripts)

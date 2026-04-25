@@ -5,6 +5,7 @@
 # Python
 *.pyc
 **/__pycache__
+/dist
 
 # Doc
 !README.md

@@ -3,8 +3,14 @@ README.md
 pyproject.toml
 src/list_dependencies_detroix23/__init__.py
 src/list_dependencies_detroix23/__main__.py
+src/list_dependencies_detroix23/cli.py
+src/list_dependencies_detroix23/definitions.py
+src/list_dependencies_detroix23/dependencies.py
 src/list_dependencies_detroix23/discoverer.py
+src/list_dependencies_detroix23/tests.py
 src/list_dependencies_detroix23.egg-info/PKG-INFO
 src/list_dependencies_detroix23.egg-info/SOURCES.txt
 src/list_dependencies_detroix23.egg-info/dependency_links.txt
 src/list_dependencies_detroix23.egg-info/top_level.txt
+src/list_dependencies_detroix23/testsmod/__init__.py
+src/list_dependencies_detroix23/testsmod/sub.py
