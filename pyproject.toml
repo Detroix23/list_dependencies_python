@@ -1,0 +1,25 @@
+[project]
+name = "list_dependencies_detroix23"
+version = "0.1.0"
+description = "List dependencies for a Python project."
+authors = [
+    { name="Detroix23", email="detroix23@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.14"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+]
+dependencies = []
+
+license = "CC-BY-4.0"
+license-files = ["LICENSE.md"]
+
+[project.urls]
+Repository = "https://github.com/Detroix23/"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
